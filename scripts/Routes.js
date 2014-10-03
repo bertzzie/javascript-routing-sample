@@ -101,6 +101,16 @@ var MyLib = MyLib || {};
             };
         };
 
+        if (root !== "/") {
+            var rootRegExp = root + "$";
+            fin.add(new RegExp(rootRegExp, "i"), function () {
+                var routeSpan = document.querySelector("#route");
+
+                routeSpan.innerHTML = "/" + root + "/";
+                console.log("Root: " + root);
+            });
+        }
+
         return fin;
     };
 })(MyLib);
