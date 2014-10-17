@@ -1,7 +1,7 @@
 Simple Javascript Routing
 =========================
 
-Sebuah proyek sederhana yang mengimplementasikan routing pada Javascript secara sederhana. Proyek ini dibuat sebagai pendukung dari karya tulis [Javascript: Pembahasan Lanjut](http://bertzzie.com/knowledge/javascript-lanjut/).
+Sebuah proyek sederhana yang mengimplementasikan routing pada Javascript secara sederhana. Proyek ini dibuat sebagai pendukung dari karya tulis [Javascript: Pembahasan Lanjut](http://bertzzie.com/knowledge/javascript-lanjut/), tepatnya pada [bab Javascript Routing](http://bertzzie.com/knowledge/javascript-lanjut/Javascript-Routing.html).
 
 Catatan Penting
 ---------------
