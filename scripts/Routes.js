@@ -16,6 +16,23 @@ var MyLib = MyLib || {};
             };
         };
 
+        var Run = function (url) {
+            var path = url || fin.getCurrentPath(),
+                i    = 0,
+                len  = routes.length,
+                match;
+
+            path = MyLib.URL.trimSlash(path);
+
+            for (i = 0; i < len; i += 1) {
+                match = path.match(routes[i].pattern);
+                if (match) {
+                    match.shift();
+                    routes[i].handler.apply({}, match);
+                }
+            }
+        };
+
         fin.setRootPath = function (newRoot) {
             root = newRoot;
         };
@@ -55,30 +72,9 @@ var MyLib = MyLib || {};
             root   = ''
         };
 
-        fin.run = function (url) {
-            var path = url || this.getCurrentPath(),
-                i    = 0,
-                len  = routes.length,
-                match;
-
-            path = MyLib.URL.trimSlash(path);
-
-            for (i = 0; i < len; i += 1) {
-                match = path.match(routes[i].pattern);
-                if (match) {
-                    match.shift();
-                    routes[i].handler.apply({}, match);
-
-                    return this;
-                }
-            }
-
-            return this;
-        };
-
         fin.navigate = function (path, title, state) {
             path = MyLib.URL.trimSlash(MyLib.URL.getPathName(path));
-            this.run(path);
+            Run(path);
 
             history.pushState(state, title, "/" + root + "/" + path);
         };
@@ -97,19 +93,9 @@ var MyLib = MyLib || {};
             }
 
             window.onpopstate = function (e) {
-                that.run(location.href);
+                Run(location.href);
             };
         };
-
-        if (root !== "/") {
-            var rootRegExp = root + "$";
-            fin.add(new RegExp(rootRegExp, "i"), function () {
-                var routeSpan = document.querySelector("#route");
-
-                routeSpan.innerHTML = "/" + root + "/";
-                console.log("Root: " + root);
-            });
-        }
 
         return fin;
     };
